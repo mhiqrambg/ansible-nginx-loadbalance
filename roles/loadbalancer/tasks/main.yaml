@@ -1,0 +1,21 @@
+---
+- name: Sudo apt-get update
+  apt:
+    update_cache: yes
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Remove default Nginx configuration
+  file:
+    state: absent
+    path: /etc/nginx/nginx.conf
+
+- name: Configure Nginx for Load Balancing
+  template:
+    src: ./templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+  notify:
+    - restart nginx

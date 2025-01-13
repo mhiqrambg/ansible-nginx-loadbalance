@@ -1,0 +1,7 @@
+# This playbook is used to setup the load balancer server
+
+- name: Setup Load Balancer
+  hosts: loadbalancer
+  become: yes
+  roles:
+    - loadbalancer
